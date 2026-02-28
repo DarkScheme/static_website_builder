@@ -2,15 +2,21 @@ from textnode import TextNode, TextType
 import os
 import shutil
 from helper import generate_pages_recursive, copy_files_recursive
+import sys
 
 def main():
+
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+    else:
+        basepath = "/"
     
-    p = "./public"
+    p = "./docs"
     s = "./static"
     deleter(p)
     copy_files_recursive(s, p)
 
-    generate_pages_recursive("content", "template.html", "public")
+    generate_pages_recursive("content", "template.html", "docs", basepath)
 
 def deleter(public):
 
